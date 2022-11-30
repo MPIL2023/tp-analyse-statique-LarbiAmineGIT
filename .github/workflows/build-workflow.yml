@@ -33,4 +33,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=MPIL2023_tp-analyse-statique-LarbiAmineGIT -Dsonar.organization=mpil2023 -Dsonar.host.url=https://sonarcloud.io -f ./spring-petclinic/spring-petclinic/pom.xml
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=MPIL2023_tp-analyse-statique-LarbiAmineGIT -Dsonar.organization=mpil2023 -Dsonar.host.url=https://sonarcloud.io -f ./spring-petclinic/pom.xml
