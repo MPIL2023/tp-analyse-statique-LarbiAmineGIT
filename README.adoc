@@ -1,0 +1,69 @@
+:icons: font
+:source-highlighter: prettify
+:pygments-style: manni
+:pygments-linenums-mode: inline
+:version: 2021-2022
+
+= Analyse statique de code avec SonarQube
+Jauffrey Flach <jauffrey.flach@gmail.com>
+v{version}
+
+== Pré-requis
+* Docker
+* Git 
+* Un editeur de texte
+
+== Mise en place de l'environnement
+Nous allons tout d'abord monter un serveur SonarQube avec Docker. 
+Pour vous simplifier la tâche, voici un fichier docker-compose :
+
+[source,yaml]
+----
+version: "3"
+
+services: 
+  sonar:
+    image: sonarqube
+    ports:
+      - 9000:9000
+----
+
+[source, bash]
+----
+# A l'endroit de votre docker-compose.yml
+docker-compose up -d
+----
+
+L'interface d'administration de SonarQube est disponible à cette adresse: http://127.0.0.1:9000
+
+=== Construction du projet
+Allons inpecter le code de l'applicarion Spring Petclinic. Clonez le repo:
+
+[source, bash]
+----
+git clone https://github.com/spring-projects/spring-petclinic.git
+----
+
+Allons maintenant analyser le code: 
+
+[source, bash]
+----
+cd spring-petclinic
+# Lançons l'analyse!
+mvn clean package sonar:sonar
+----
+
+TIP: Prenez un icon:mug-hot[2x] le temps que Maven télécharge le monde. 
+
+Vous pouvez maintenant voir le résultat de l'analyse statique de code.
+
+=== Automatisation
+
+Utilisez Github Actions pour automatiser l'analyse d'un de vos projets avec le service gratuit https://sonarcloud.io/ directement depuis un de vos projets Github.
+
+Vous pouvez utiliser comme exemple le repo https://github.com/SonarSource/sonarcloud-github-action-samples/tree/maven
+
+Adaptez alors le code de votre repository de tp comme suit: 
+
+* Ajoutez le code de https://github.com/spring-projects/spring-petclinic.git en tant que sous-module git de votre projet dans un dossier spring-petclinic
+* Adaptez le .github/workflows/build-workflow pour éxécuter l'analyse statique du code sur le sous-module
