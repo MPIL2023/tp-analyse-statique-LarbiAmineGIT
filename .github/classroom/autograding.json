@@ -1,0 +1,34 @@
+{
+  "tests": [
+    {
+      "name": "Check submodule is present",
+      "setup": "",
+      "run": "ls spring-petclinic",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 4
+    },
+    {
+      "name": "Check build workflow present",
+      "setup": "",
+      "run": "ls .github/workflows/build-workflow.yml",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 4
+    },
+    {
+      "name": "Check status",
+      "setup": "",
+      "run": "URL=$(git remote get-url origin); curl -v $URL/actions/workflows/build-workflow.yml/badge.svg | grep passing",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 4
+    }
+  ]
+}
